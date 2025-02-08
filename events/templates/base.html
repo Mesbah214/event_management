@@ -1,4 +1,5 @@
 <!doctype html>
+{% load static %}
 <html class="text-[62.5%]" lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
           rel="stylesheet">
-    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="{% static "css/output.css" %}">
     <title>{% block title %}{% endblock title %} &mdash; Event Management</title>
 </head>
 <body class="font-[Roboto] bg-stone-50 text-[1.6rem]">
