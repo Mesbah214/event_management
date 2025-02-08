@@ -1,0 +1,51 @@
+<!doctype html>
+<html class="text-[62.5%]" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--    font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <title>{% block title %}{% endblock title %} &mdash; Event Management</title>
+</head>
+<body class="font-[Roboto] bg-stone-50 text-[1.6rem]">
+<header class="fixed top-0 left-0 right-0 bg-white py-[2rem] px-[2.4rem]">
+    <nav>
+        <span id="nav-label" hidden>Navigation</span>
+        <div class="">
+            <ul class="flex flex-wrap gap-x-[1.6rem] gap-y-[.8rem] justify-center">
+                <li class="">
+                    <a href="{% url "events" %}" class="capitalize hover:text-blue-700">events</a>
+                </li>
+                <li class="">
+                    <a href="{% url "dashboard" %}" class="capitalize hover:text-blue-700">dashboard</a>
+                </li>
+                <li class="">
+                    <a href="{% url "categories" %}" class="capitalize hover:text-blue-700">categories</a>
+                </li>
+                <li class="">
+                    <a href="{% url "participants" %}" class="capitalize hover:text-blue-700">participants</a>
+                </li>
+                <li class="">
+                    <a href="{% url "new-event" %}" class="capitalize hover:text-blue-700">create event</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<main>
+    {% block home %} {% endblock home %}
+    {% block events %}{% endblock events %}
+    {% block participants %}{% endblock participants %}
+    {% block categories %}{% endblock categories %}
+    {% block create_event %}{% endblock create_event %}
+    {% block details_event %}{% endblock details_event %}
+</main>
+<footer></footer>
+</body>
+</html>

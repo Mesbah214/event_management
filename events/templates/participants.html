@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}Participants{% endblock title %}
+{% block participants %}
+<div class="px-[2.4rem] max-w-[112rem] mx-auto mt-[12rem] mb-[4rem]">
+    <h1 class="text-[2.4rem] font-bold md:text-[3.2rem] capitalize">create new participant</h1>
+    <form class="mt-[3.2rem] max-w-[57.6rem]" onsubmit="">
+        <div class="[&:not(:last-child)]:mb-[3.2rem]">
+            <label for="name" class="block capitalize mb-[.6rem]">participant name</label>
+            <input class="border border-blue-800 px-[.8rem] py-[.4rem] w-full focus-visible:outline focus-visible:outline-blue-700 rounded-lg" type="text" autocomplete="off" id="name" name="name" placeholder="e.g, musical, drama" required />
+        </div>
+        <div class="[&:not(:last-child)]:mb-[3.2rem]">
+            <label for="email" class="block capitalize mb-[.6rem]">participant email</label>
+            <input class="border border-blue-800 px-[.8rem] py-[.4rem] w-full focus-visible:outline focus-visible:outline-blue-700 rounded-lg" type="email" autocomplete="off" id="email" name="email" placeholder="e.g, john@example.com" required />
+        </div>
+        <fieldset class="[&:not(:last-child)]:mb-[3.2rem]">
+            <legend class="capitalize mb-[.6rem]">available events:</legend>
+            <div>
+                <input class="accent-blue-800" type="checkbox" id="lorem" name="lorem" />
+                <label class="capitalize" for="lorem">lorem</label>
+            </div>
+            <div>
+                <input class="accent-blue-800" type="checkbox" id="ipsum" name="ipsum" />
+                <label class="capitalize" for="ipsum">ipsum</label>
+            </div>
+            <div>
+                <input class="accent-blue-800" type="checkbox" id="dolor" name="dolor" />
+                <label class="capitalize" for="dolor">dolor</label>
+            </div>
+            <div>
+                <input class="accent-blue-800" type="checkbox" id="amet" name="amet" />
+                <label class="capitalize" for="amet">amet</label>
+            </div>
+        </fieldset>
+        <div class="[&:not(:last-child)]:mb-[3.2rem]">
+            <button class="px-[2.6rem] py-[.8rem] bg-blue-900 w-full text-white focus-visible:outline focus-visible:outline-blue-700 rounded-lg capitalize w-max cursor-pointer" type="submit">save</button>
+        </div>
+    </form>
+    <div class="mt-[4.8rem]">
+        <h2 class="capitalize font-medium text-[2rem]">all participants</h2>
+        <p class="text-[1.2rem] text-gray-500 mb-[2.4rem]">Click on the participant name to update it</p>
+        <p class="text-gray-600 mt-[.4rem]">Number of total participant: <span class="text-gray-900">128</span></p>
+        <div class="mt-[2.4rem] rounded-md">
+            <div class="grid grid-cols-2 bg-white py-[.8rem] border-b border-gray-200">
+                <h4 class="capitalize text-[1.3rem] text-gray-600 px-[1.2rem]">name</h4>
+                <p class="capitalize text-[1.3rem] text-gray-600 px-[1.2rem]">email</p>
+            </div>
+            <div class="grid grid-cols-2 bg-white py-[.8rem] [&:not(:last-child)]:border-b border-gray-100">
+                <p class="text-slate-900 capitalize text-[1.3rem] px-[1.2rem]">Oliver Bennett</p>
+                <p class="capitalize text-[1.3rem] text-gray-800 px-[1.2rem] break-words">oliver.bennett@emailhub.com</p>
+            </div>
+            <div class="grid grid-cols-2 bg-white py-[.8rem] [&:not(:last-child)]:border-b border-gray-100">
+                <p class="text-slate-900 capitalize text-[1.3rem] px-[1.2rem]">Sophie Carter</p>
+                <p class="capitalize text-[1.3rem] text-gray-800 px-[1.2rem] break-words">sophie.carter@inboxnow.co.uk</p>
+            </div>
+            <div class="grid grid-cols-2 bg-white py-[.8rem] [&:not(:last-child)]:border-b border-gray-100">
+                <p class="text-slate-900 capitalize text-[1.3rem] px-[1.2rem]">Liam Thompson</p>
+                <p class="capitalize text-[1.3rem] text-gray-800 px-[1.2rem] break-words">liam.thompson@fastmail.net</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock participants %}

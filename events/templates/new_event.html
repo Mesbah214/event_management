@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}New Event{% endblock title %}
+{% block create_event %}
+<div class="px-[2.4rem] max-w-[112rem] mx-auto mt-[12rem] mb-[4rem]">
+    <h1 class="text-[2.4rem] font-bold md:text-[3.2rem] capitalize">create new event</h1>
+    <form class="mt-[3.2rem] max-w-[57.6rem]" onsubmit="">
+        <div class="[&:not(:last-child)]:mb-[3.2rem]">
+            <label for="name" class="block capitalize mb-[.6rem]">event name</label>
+            <input class="border border-blue-800 px-[.8rem] py-[.4rem] w-full focus-visible:outline focus-visible:outline-blue-700 rounded-lg" type="text" autocomplete="off" id="name" name="name" placeholder="e.g, reuniting oldies" required />
+        </div>
+        <div class="[&:not(:last-child)]:mb-[3.2rem]">
+            <label for="desc" class="block capitalize mb-[.6rem]">event description</label>
+            <textarea class="border border-blue-800 px-[.8rem] py-[.4rem] w-full focus-visible:outline focus-visible:outline-blue-700 rounded-lg" autocomplete="off" id="desc" name="desc" placeholder="e.g, something about the event" rows="6" required></textarea>
+        </div>
+        <div class="[&:not(:last-child)]:mb-[3.2rem]">
+            <label for="address" class="block capitalize mb-[.6rem]">event address</label>
+            <input class="border border-blue-800 px-[.8rem] py-[.4rem] w-full focus-visible:outline focus-visible:outline-blue-700 rounded-lg" type="text" autocomplete="off" id="address" name="address" required />
+        </div>
+        <div class="[&:not(:last-child)]:mb-[3.2rem]">
+            <label for="date" class="block capitalize mb-[.6rem]">event date</label>
+            <input class="border border-blue-800 px-[.8rem] py-[.4rem] focus-visible:outline focus-visible:outline-blue-700 rounded-lg" type="date" autocomplete="off" id="date" name="date" required />
+        </div>
+        <div class="[&:not(:last-child)]:mb-[3.2rem]">
+            <label for="time" class="block capitalize mb-[.6rem]">event time</label>
+            <input class="border border-blue-800 px-[.8rem] py-[.4rem] focus-visible:outline focus-visible:outline-blue-700 rounded-lg" type="time" autocomplete="off" id="time" name="time" required />
+        </div>
+        <div class="[&:not(:last-child)]:mb-[3.2rem]">
+            <label for="category" class="block capitalize mb-[.6rem]">event category</label>
+            <select class="border border-blue-800 px-[.8rem] py-[.6rem] focus-visible:outline focus-visible:outline-blue-700 rounded-lg capitalize" id="category" name="category" required>
+                <option value="" disabled selected>select a category</option>
+                <option value="musical">musical</option>
+                <option value="drama">drama</option>
+                <option value="meetup">meetup</option>
+            </select>
+        </div>
+        <div class="[&:not(:last-child)]:mb-[3.2rem]">
+            <button class="px-[2.6rem] py-[.8rem] bg-blue-900 w-full text-white focus-visible:outline focus-visible:outline-blue-700 rounded-lg capitalize w-max cursor-pointer" type="submit">save</button>
+        </div>
+    </form>
+</div>
+{% endblock create_event %}

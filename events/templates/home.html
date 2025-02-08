@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock title %}
+{% block home %}
+<div class="px-[2.4rem] max-w-[112rem] mx-auto mt-[12rem] mb-[4rem]">
+    <h1 class="text-[2.4rem] font-bold md:text-[3.2rem] capitalize">dashboard</h1>
+    <!--    grid items-->
+    <div class="mt-[3.2rem] grid gap-[2.4rem] min-[576px]:grid-cols-2 lg:grid-cols-4">
+        <div class="bg-white p-[2.4rem] rounded-md shadow-xs">
+            <h3 class="text-[1.8rem] capitalize font-medium"><span
+                    class="block uppercase font-semibold text-[1rem] text-gray-400">total</span>participants
+            </h3>
+            <div class="flex items-center justify-between mt-[1rem]">
+                <p class="text-[4rem] font-light">50</p>
+                <div class="bg-yellow-200 p-[1rem] rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path
+                                d="M13.07 10.41C13.6774 9.5613 14.0041 8.54375 14.0041 7.50004C14.0041 6.45632 13.6774 5.43877 13.07 4.59004C13.6388 4.20257 14.3118 3.99684 15 4.00004C15.9283 4.00004 16.8185 4.36879 17.4749 5.02516C18.1313 5.68154 18.5 6.57178 18.5 7.50004C18.5 8.42829 18.1313 9.31853 17.4749 9.97491C16.8185 10.6313 15.9283 11 15 11C14.3118 11.0032 13.6388 10.7975 13.07 10.41ZM5.5 7.50004C5.5 6.8078 5.70527 6.13111 6.08986 5.55554C6.47444 4.97997 7.02107 4.53137 7.66061 4.26646C8.30015 4.00155 9.00388 3.93224 9.68282 4.06729C10.3618 4.20234 10.9854 4.53568 11.4749 5.02516C11.9644 5.51465 12.2977 6.13829 12.4327 6.81722C12.5678 7.49615 12.4985 8.19989 12.2336 8.83943C11.9687 9.47897 11.5201 10.0256 10.9445 10.4102C10.3689 10.7948 9.69223 11 9 11C8.07174 11 7.1815 10.6313 6.52513 9.97491C5.86875 9.31853 5.5 8.42829 5.5 7.50004ZM7.5 7.50004C7.5 7.79671 7.58797 8.08672 7.7528 8.33339C7.91762 8.58007 8.15189 8.77232 8.42597 8.88586C8.70006 8.99939 9.00166 9.02909 9.29264 8.97121C9.58361 8.91334 9.85088 8.77048 10.0607 8.5607C10.2704 8.35092 10.4133 8.08364 10.4712 7.79267C10.5291 7.5017 10.4994 7.2001 10.3858 6.92601C10.2723 6.65192 10.08 6.41765 9.83335 6.25283C9.58668 6.08801 9.29667 6.00004 9 6.00004C8.60218 6.00004 8.22064 6.15807 7.93934 6.43938C7.65804 6.72068 7.5 7.10221 7.5 7.50004ZM16 17V19H2V17C2 17 2 13 9 13C16 13 16 17 16 17ZM14 17C13.86 16.22 12.67 15 9 15C5.33 15 4.07 16.31 4 17M15.95 13C16.5629 13.4768 17.064 14.0819 17.4182 14.7729C17.7723 15.4639 17.9709 16.2241 18 17V19H22V17C22 17 22 13.37 15.94 13H15.95Z"
+                                fill="black"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white p-[2.4rem] rounded-md shadow-xs">
+            <h3 class="text-[1.8rem] capitalize font-medium"><span
+                    class="block uppercase font-semibold text-[1rem] text-gray-400">total</span>events</h3>
+            <div class="flex items-center justify-between mt-[1rem]">
+                <p class="text-[4rem] font-light">50</p>
+                <div class="bg-green-200 p-[1rem] rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path
+                                d="M16 21C15.45 21 14.9793 20.8043 14.588 20.413C14.1967 20.0217 14.0007 19.5507 14 19V15C14 14.45 14.196 13.9793 14.588 13.588C14.98 13.1967 15.4507 13.0007 16 13H20C20.55 13 21.021 13.196 21.413 13.588C21.805 13.98 22.0007 14.4507 22 15V19C22 19.55 21.8043 20.021 21.413 20.413C21.0217 20.805 20.5507 21.0007 20 21H16ZM16 19H20V15H16V19ZM2 18V16H11V18H2ZM16 11C15.45 11 14.9793 10.8043 14.588 10.413C14.1967 10.0217 14.0007 9.55067 14 9V5C14 4.45 14.196 3.97933 14.588 3.588C14.98 3.19667 15.4507 3.00067 16 3H20C20.55 3 21.021 3.196 21.413 3.588C21.805 3.98 22.0007 4.45067 22 5V9C22 9.55 21.8043 10.021 21.413 10.413C21.0217 10.805 20.5507 11.0007 20 11H16ZM16 9H20V5H16V9ZM2 8V6H11V8H2Z"
+                                fill="black"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white p-[2.4rem] rounded-md shadow-xs">
+            <h3 class="text-[1.8rem] capitalize font-medium"><span
+                    class="block uppercase font-semibold text-[1rem] text-gray-400">total</span>upcoming events
+            </h3>
+            <div class="flex items-center justify-between mt-[1rem]">
+                <p class="text-[4rem] font-light">50</p>
+                <div class="bg-rose-200 p-[1rem] rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path
+                                d="M5 22C4.45 22 3.97933 21.8043 3.588 21.413C3.19667 21.0217 3.00067 20.5507 3 20V6C3 5.45 3.196 4.97934 3.588 4.588C3.98 4.19667 4.45067 4.00067 5 4H6V3C6 2.71667 6.096 2.47934 6.288 2.288C6.48 2.09667 6.71733 2.00067 7 2C7.28267 1.99934 7.52033 2.09534 7.713 2.288C7.90567 2.48067 8.00133 2.718 8 3V4H16V3C16 2.71667 16.096 2.47934 16.288 2.288C16.48 2.09667 16.7173 2.00067 17 2C17.2827 1.99934 17.5203 2.09534 17.713 2.288C17.9057 2.48067 18.0013 2.718 18 3V4H19C19.55 4 20.021 4.196 20.413 4.588C20.805 4.98 21.0007 5.45067 21 6V20C21 20.55 20.8043 21.021 20.413 21.413C20.0217 21.805 19.5507 22.0007 19 22H5ZM5 20H19V10H5V20ZM5 8H19V6H5V8ZM8 14C7.71667 14 7.47933 13.904 7.288 13.712C7.09667 13.52 7.00067 13.2827 7 13C6.99933 12.7173 7.09533 12.48 7.288 12.288C7.48067 12.096 7.718 12 8 12H16C16.2833 12 16.521 12.096 16.713 12.288C16.905 12.48 17.0007 12.7173 17 13C16.9993 13.2827 16.9033 13.5203 16.712 13.713C16.5207 13.9057 16.2833 14.0013 16 14H8ZM8 18C7.71667 18 7.47933 17.904 7.288 17.712C7.09667 17.52 7.00067 17.2827 7 17C6.99933 16.7173 7.09533 16.48 7.288 16.288C7.48067 16.096 7.718 16 8 16H13C13.2833 16 13.521 16.096 13.713 16.288C13.905 16.48 14.0007 16.7173 14 17C13.9993 17.2827 13.9033 17.5203 13.712 17.713C13.5207 17.9057 13.2833 18.0013 13 18H8Z"
+                                fill="black"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white p-[2.4rem] rounded-md shadow-xs">
+            <h3 class="text-[1.8rem] capitalize font-medium"><span
+                    class="block uppercase font-semibold text-[1rem] text-gray-400">total</span>past events</h3>
+            <div class="flex items-center justify-between mt-[1rem]">
+                <p class="text-[4rem] font-light">50</p>
+                <div class="bg-sky-200 p-[1rem] rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path
+                                d="M10.95 15.45L14.425 11.975C14.625 11.775 14.8667 11.675 15.15 11.675C15.4333 11.675 15.675 11.775 15.875 11.975C16.075 12.175 16.175 12.4167 16.175 12.7C16.175 12.9833 16.075 13.225 15.875 13.425L11.65 17.65C11.45 17.85 11.2167 17.95 10.95 17.95C10.6833 17.95 10.45 17.85 10.25 17.65L8.125 15.525C7.925 15.325 7.825 15.0833 7.825 14.8C7.825 14.5167 7.925 14.275 8.125 14.075C8.325 13.875 8.56667 13.775 8.85 13.775C9.13333 13.775 9.375 13.875 9.575 14.075L10.95 15.45ZM5 22C4.45 22 3.97933 21.8043 3.588 21.413C3.19667 21.0217 3.00067 20.5507 3 20V6C3 5.45 3.196 4.97934 3.588 4.588C3.98 4.19667 4.45067 4.00067 5 4H6V3C6 2.71667 6.096 2.47934 6.288 2.288C6.48 2.09667 6.71733 2.00067 7 2C7.28267 1.99934 7.52033 2.09534 7.713 2.288C7.90567 2.48067 8.00133 2.718 8 3V4H16V3C16 2.71667 16.096 2.47934 16.288 2.288C16.48 2.09667 16.7173 2.00067 17 2C17.2827 1.99934 17.5203 2.09534 17.713 2.288C17.9057 2.48067 18.0013 2.718 18 3V4H19C19.55 4 20.021 4.196 20.413 4.588C20.805 4.98 21.0007 5.45067 21 6V20C21 20.55 20.8043 21.021 20.413 21.413C20.0217 21.805 19.5507 22.0007 19 22H5ZM5 20H19V10H5V20ZM5 8H19V6H5V8Z"
+                                fill="black"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--    end of grid items-->
+    <!--    dynamic stat-->
+    <div class="mt-[4.8rem]">
+        <h2 class="capitalize font-medium text-[2rem]">today&apos;s events</h2>
+        <div class="mt-[2.4rem] rounded-md">
+            <div class="grid grid-cols-3 bg-white py-[.8rem] border-b border-gray-200">
+                <h4 class="capitalize text-[1.3rem] text-gray-600 px-[1.2rem]">name</h4>
+                <h4 class="capitalize text-[1.3rem] text-gray-600 px-[1.2rem]">category</h4>
+                <p class="capitalize text-[1.3rem] text-gray-600 px-[1.2rem]">participants</p>
+            </div>
+            <div class="grid grid-cols-3 bg-white py-[.8rem] [&:not(:last-child)]:border-b border-gray-100">
+                <a class="text-indigo-500 capitalize text-[1.3rem] px-[1.2rem]" href="#" title="Bijoy 71">Lorem
+                    ipsum</a>
+                <a class="capitalize text-[1.3rem] text-gray-800 px-[1.2rem]">musical</a>
+                <p class="capitalize text-[1.3rem] text-gray-800 px-[1.2rem]">1010</p>
+            </div>
+            <div class="grid grid-cols-3 bg-white py-[.8rem] [&:not(:last-child)]:border-b border-gray-100">
+                <a class="text-indigo-500 capitalize text-[1.3rem] px-[1.2rem]" href="#" title="Bijoy 71">Lorem
+                    ipsum dolor sit.</a>
+                <a class="capitalize text-[1.3rem] text-gray-800 px-[1.2rem]">musical</a>
+                <p class="capitalize text-[1.3rem] text-gray-800 px-[1.2rem]">1010</p>
+            </div>
+            <div class="grid grid-cols-3 bg-white py-[.8rem] [&:not(:last-child)]:border-b border-gray-100">
+                <a class="text-indigo-500 capitalize text-[1.3rem] px-[1.2rem]" href="#" title="Bijoy 71">Lorem
+                    ipsum dolor sit amet, consectetur adipisicing.</a>
+                <a class="capitalize text-[1.3rem] text-gray-800 px-[1.2rem]">musical</a>
+                <p class="capitalize text-[1.3rem] text-gray-800 px-[1.2rem]">1010</p>
+            </div>
+        </div>
+    </div>
+    <!--    end of dynamic stat-->
+</div>
+{% endblock home %}
