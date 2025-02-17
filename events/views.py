@@ -1,22 +1,43 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from events.forms import EventForm
+from events.participant_form import ParticipantForm, ParticipantModelForm
+from events.models import Event, Participant
 
 # Create your views here.
+
 
 def all_events(request):
     return render(request, 'events.html')
 
+
 def dashboard(request):
     return render(request, 'home.html')
+
 
 def categories(request):
     return render(request, 'categories.html')
 
+
 def participants(request):
-    return render(request, 'participants.html')
+    form = ParticipantModelForm()
+
+    if request.method == 'POST':
+        form = ParticipantModelForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+            return render(request, 'participants.html', {"form": form, "message": "Task added succesfully"})
+
+    context = {'form': form}
+    return render(request, 'participants.html', context)
+
 
 def new_event(request):
-    return render(request, 'new_event.html')
+    form = EventForm()
+    context = {'form': form}
+    return render(request, 'new_event.html', context)
+
 
 def details_event(request):
     return render(request, 'details_event.html')

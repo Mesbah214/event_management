@@ -12,11 +12,17 @@ class Event(models.Model):
     category = models.ForeignKey(
         "Category", on_delete=models.DO_NOTHING, null=False, default=1)
 
+    def __str__(self):
+        return self.name
+
 
 class Participant(models.Model):
     name = models.CharField(max_length=255)
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
     event = models.ManyToManyField(Event)
+
+    def __str__(self):
+        return self.name
 
 
 class Category(models.Model):
