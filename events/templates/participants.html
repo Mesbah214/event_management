@@ -12,13 +12,13 @@
         {% csrf_token %}
         {{ form }}
         <div class="[&:not(:last-child)]:mb-[3.2rem]">
-            <button class="px-[2.6rem] py-[.8rem] bg-blue-900 text-white focus-visible:outline focus-visible:outline-blue-700 rounded-lg capitalize w-max cursor-pointer" type="submit">save</button>
+            <button class="px-[2.6rem] py-[.8rem] bg-blue-900 text-white focus-visible:outline focus-visible:outline-blue-700 rounded-lg capitalize w-max cursor-pointer mt-[2.4rem]" type="submit">save</button>
         </div>
     </form>
     <div class="mt-[4.8rem]">
         <h2 class="capitalize font-medium text-[2rem]">all participants</h2>
         <p class="text-[1.2rem] text-gray-500 mb-[2.4rem]">Click on the participant name to update it</p>
-        <p class="text-gray-600 mt-[.4rem]">Number of total participant: <span class="text-gray-900">128</span></p>
+        <p class="text-gray-600 mt-[.4rem]">Number of total participant: <span class="text-gray-900">{{ number_of_participants }}</span></p>
         <div class="mt-[2.4rem] rounded-md">
             <div class="grid grid-cols-2 bg-white py-[.8rem] border-b border-gray-200">
                 <h4 class="capitalize text-[1.3rem] text-gray-600 px-[1.2rem]">name</h4>

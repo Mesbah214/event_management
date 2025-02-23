@@ -3,7 +3,7 @@ from events.models import Participant
 
 
 class StyledFormMixin:
-    default_classes = "border border-blue-800 px-[.8rem] py-[.4rem] w-full focus-visible:outline focus-visible:outline-blue-700 rounded-lg"
+    default_classes = "border border-blue-800 px-[.8rem] py-[.4rem] w-full focus-visible:outline focus-visible:outline-blue-700 rounded-lg mb-[2.4rem]"
 
     def apply_styled_widgets(self):
         for field_name, field in self.fields.items():

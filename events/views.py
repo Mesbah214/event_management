@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from events.forms import EventForm
-from events.participant_form import ParticipantModelForm
+from events.forms.event_form import EventModelForm
+from events.forms.participant_form import ParticipantModelForm
 from events.models import Event, Participant, Category
 from django.db.models import Count
 
@@ -9,7 +9,8 @@ from django.db.models import Count
 
 
 def all_events(request):
-    events = Event.objects.select_related('category').annotate(num_par=Count('participant'))
+    events = Event.objects.select_related(
+        'category').annotate(num_par=Count('participant'))
     num_events = Event.objects.count()
     context = {'events': events, 'num_events': num_events}
     return render(request, 'events.html', context)
@@ -29,20 +30,33 @@ def categories(request):
 def participants(request):
     form = ParticipantModelForm()
     participants = Participant.objects.all()
+    number_of_participants = Participant.objects.count()
 
     if request.method == 'POST':
         form = ParticipantModelForm(request.POST)
         if form.is_valid():
             form.save()
 
-            return render(request, 'participants.html', {"form": form, "message": "Task added succesfully", "participants": participants})
+            return render(request, 'participants.html', {
+                "form": form,
+                "message": "Task added succesfully",
+                "participants": participants,
+                'number_of_participants': number_of_participants
+            })
 
-    context = {'form': form, "participants": participants}
+    context = {'form': form, "participants": participants, 'number_of_participants': number_of_participants}
     return render(request, 'participants.html', context)
 
 
 def new_event(request):
-    form = EventForm()
+    form = EventModelForm()
+
+    if request.method == 'POST':
+        form = EventModelForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+            return render(request, 'new_event.html', {'form': form, "message": "Event added succesfully"})
     context = {'form': form}
     return render(request, 'new_event.html', context)
 
