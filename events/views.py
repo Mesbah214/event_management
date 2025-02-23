@@ -1,14 +1,16 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from events.forms import EventForm
-from events.participant_form import ParticipantForm, ParticipantModelForm
+from events.participant_form import ParticipantModelForm
 from events.models import Event, Participant
 
 # Create your views here.
 
 
 def all_events(request):
-    return render(request, 'events.html')
+    events = Event.objects.all()
+    context = {'events': events}
+    return render(request, 'events.html', context)
 
 
 def dashboard(request):
@@ -21,15 +23,16 @@ def categories(request):
 
 def participants(request):
     form = ParticipantModelForm()
+    participants = Participant.objects.all()
 
     if request.method == 'POST':
         form = ParticipantModelForm(request.POST)
         if form.is_valid():
             form.save()
 
-            return render(request, 'participants.html', {"form": form, "message": "Task added succesfully"})
+            return render(request, 'participants.html', {"form": form, "message": "Task added succesfully", "participants": participants})
 
-    context = {'form': form}
+    context = {'form': form, "participants": participants}
     return render(request, 'participants.html', context)
 
 
