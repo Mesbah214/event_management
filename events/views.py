@@ -3,13 +3,15 @@ from django.http import HttpResponse
 from events.forms import EventForm
 from events.participant_form import ParticipantModelForm
 from events.models import Event, Participant
+from django.db.models import Count
 
 # Create your views here.
 
 
 def all_events(request):
-    events = Event.objects.all()
-    context = {'events': events}
+    events = Event.objects.select_related('category').annotate(num_par=Count('participant'))
+    num_events = Event.objects.count()
+    context = {'events': events, 'num_events': num_events}
     return render(request, 'events.html', context)
 
 
