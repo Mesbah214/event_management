@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from events.forms import EventForm
 from events.participant_form import ParticipantModelForm
-from events.models import Event, Participant
+from events.models import Event, Participant, Category
 from django.db.models import Count
 
 # Create your views here.
@@ -20,7 +20,10 @@ def dashboard(request):
 
 
 def categories(request):
-    return render(request, 'categories.html')
+    cats = Category.objects.all()
+    num_of_cats = Category.objects.count()
+    context = {'cats': cats, 'number_of_categories': num_of_cats}
+    return render(request, 'categories.html', context)
 
 
 def participants(request):
