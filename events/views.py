@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from events.forms.category_form import CategoryModelForm
-from events.forms.event_form import EventModelForm
-from events.forms.participant_form import ParticipantModelForm
+from events.forms import CategoryModelForm, EventModelForm, ParticipantModelForm
 from events.models import Event, Participant, Category
-from django.db.models import Count
+from django.db.models import Count, Q
+from datetime import date
+
 
 # Create your views here.
 
@@ -18,7 +18,36 @@ def all_events(request):
 
 
 def dashboard(request):
-    return render(request, 'home.html')
+    type = request.GET.get('type', 'all')
+    participants = Participant.objects.all().count()
+    base_query = Event.objects.annotate(
+        num_par=Count('participant')).select_related('category')
+    counts = Event.objects.aggregate(
+        events=Count("id"),
+        upcoming=Count("id", filter=Q(date__gt=date.today())),
+        past=Count("id", filter=Q(date__lt=date.today()))
+    )
+
+    if type == 'total_events':
+        events = base_query.all()
+        heading = "total"
+    elif type == 'participants':
+        events = base_query.filter(date__month=date.today().month)
+        heading = "today's"
+    elif type == 'upcoming_events':
+        events = base_query.filter(date__gt=date.today())
+        heading = "upcoming"
+    elif type == 'past_events':
+        events = base_query.filter(date__lt=date.today())
+        heading = "past"
+
+    context = {
+        "number_of_participants": participants,
+        "counts": counts,
+        "events": events,
+        "heading": heading
+    }
+    return render(request, 'home.html', context)
 
 
 def categories(request):
@@ -31,7 +60,12 @@ def categories(request):
         if form.is_valid():
             form.save()
 
-            return render(request, "categories.html", {"form": form, "message": "Category added successfully", "cats": cats, "number_of_categories": num_of_cats})
+            return render(request, "categories.html", {
+                "form": form,
+                "message": "Category added successfully",
+                "cats": cats,
+                "number_of_categories": num_of_cats
+            })
     context = {'form': form, 'cats': cats, 'number_of_categories': num_of_cats}
     return render(request, 'categories.html', context)
 
