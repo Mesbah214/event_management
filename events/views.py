@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from events.forms.category_form import CategoryModelForm
 from events.forms.event_form import EventModelForm
 from events.forms.participant_form import ParticipantModelForm
 from events.models import Event, Participant, Category
@@ -21,9 +22,17 @@ def dashboard(request):
 
 
 def categories(request):
+    form = CategoryModelForm
     cats = Category.objects.all()
     num_of_cats = Category.objects.count()
-    context = {'cats': cats, 'number_of_categories': num_of_cats}
+
+    if request.method == 'POST':
+        form = CategoryModelForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+            return render(request, "categories.html", {"form": form, "message": "Category added successfully", "cats": cats, "number_of_categories": num_of_cats})
+    context = {'form': form, 'cats': cats, 'number_of_categories': num_of_cats}
     return render(request, 'categories.html', context)
 
 
@@ -44,7 +53,8 @@ def participants(request):
                 'number_of_participants': number_of_participants
             })
 
-    context = {'form': form, "participants": participants, 'number_of_participants': number_of_participants}
+    context = {'form': form, "participants": participants,
+               'number_of_participants': number_of_participants}
     return render(request, 'participants.html', context)
 
 
