@@ -3,8 +3,10 @@
 {% block create_event %}
 <div class="px-[2.4rem] max-w-[112rem] mx-auto mt-[12rem] mb-[4rem]">
     <h1 class="text-[2.4rem] font-bold md:text-[3.2rem] capitalize">create new event</h1>
-    {% if message %}
+    {% if messages %}
+    {% for message in messages %}
     <p>{{ message }}</p>
+    {% endfor %}
     {% endif %}
     <form class="mt-[3.2rem] max-w-[57.6rem]" onsubmit="" method="POST">
         {% csrf_token %}

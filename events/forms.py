@@ -1,6 +1,5 @@
 from django import forms
-from events.models import Participant
-
+from events.models import Category, Event, Participant
 
 class StyledFormMixin:
     default_classes = "border border-blue-800 px-[.8rem] py-[.4rem] w-full focus-visible:outline focus-visible:outline-blue-700 rounded-lg mb-[2.4rem]"
@@ -10,19 +9,36 @@ class StyledFormMixin:
             if isinstance(field.widget, forms.TextInput):
                 field.widget.attrs.update({
                     'class': self.default_classes,
-                    'placeholder': "e.g. John, Doe"
+                    'placeholder': "e.g. Musical, Drama"
                 })
-            elif isinstance(field.widget, forms.EmailInput):
+            elif isinstance(field.widget, forms.Textarea):
                 field.widget.attrs.update({
                     'class': self.default_classes,
-                    'placeholder': "e.g. john@gmail.com"
+                    'placeholder': "e.g. Marks a musical event"
                 })
 
-            elif isinstance(field.widget, forms.CheckboxSelectMultiple):
-                field.widget.attrs.update({
-                    'class': 'space-y-2'
-                })
+class CategoryModelForm(StyledFormMixin, forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.apply_styled_widgets()
 
+    class Meta:
+        model = Category
+        fields = '__all__'
+
+class EventModelForm(StyledFormMixin, forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.apply_styled_widgets()
+
+    class Meta:
+        model = Event
+        fields = '__all__'
+        widgets = {
+            'category': forms.Select,
+            'date': forms.SelectDateWidget,
+            'time': forms.TimeInput(attrs={'type': 'time'})
+        }
 
 class ParticipantModelForm(StyledFormMixin, forms.ModelForm):
     def __init__(self, *args, **kwargs):

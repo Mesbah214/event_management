@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from events.forms import CategoryModelForm, EventModelForm, ParticipantModelForm
 from events.models import Event, Participant, Category
 from django.db.models import Count, Q
 from datetime import date
+from django.contrib import messages
 
 
 # Create your views here.
@@ -27,13 +28,12 @@ def dashboard(request):
         upcoming=Count("id", filter=Q(date__gt=date.today())),
         past=Count("id", filter=Q(date__lt=date.today()))
     )
+    events = base_query.filter(date__month=date.today().month)
+    heading = "today's"
 
     if type == 'total_events':
         events = base_query.all()
         heading = "total"
-    elif type == 'participants':
-        events = base_query.filter(date__month=date.today().month)
-        heading = "today's"
     elif type == 'upcoming_events':
         events = base_query.filter(date__gt=date.today())
         heading = "upcoming"
@@ -100,7 +100,9 @@ def new_event(request):
         if form.is_valid():
             form.save()
 
-            return render(request, 'new_event.html', {'form': form, "message": "Event added succesfully"})
+            # return render(request, 'new_event.html', {'form': form, "message": "Event added succesfully"})
+            messages.success(request, 'Task created successfully')
+            return redirect('new-event')
     context = {'form': form}
     return render(request, 'new_event.html', context)
 
