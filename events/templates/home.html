@@ -85,7 +85,7 @@
             {% if events %}
             {% for event in events %}
             <div class="grid grid-cols-3 bg-white py-[.8rem] [&:not(:last-child)]:border-b border-gray-100">
-                <a class="text-indigo-500 capitalize text-[1.3rem] px-[1.2rem]" href="#" title="Bijoy 71">{{ event.name }}</a>
+                <a href={% url "details-event" event.id %} class="text-indigo-500 capitalize text-[1.3rem] px-[1.2rem]" href="#" title="Bijoy 71">{{ event.name }}</a>
                 <a class="capitalize text-[1.3rem] text-gray-800 px-[1.2rem]">{{ event.category }}</a>
                 <p class="capitalize text-[1.3rem] text-gray-800 px-[1.2rem]">{{ event.num_par }}</p>
             </div>

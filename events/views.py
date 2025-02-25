@@ -28,7 +28,7 @@ def dashboard(request):
         upcoming=Count("id", filter=Q(date__gt=date.today())),
         past=Count("id", filter=Q(date__lt=date.today()))
     )
-    events = base_query.filter(date__month=date.today().month)
+    events = base_query.filter(date=date.today())
     heading = "today's"
 
     if type == 'total_events':
@@ -100,12 +100,30 @@ def new_event(request):
         if form.is_valid():
             form.save()
 
-            # return render(request, 'new_event.html', {'form': form, "message": "Event added succesfully"})
             messages.success(request, 'Task created successfully')
             return redirect('new-event')
+
     context = {'form': form}
     return render(request, 'new_event.html', context)
 
 
-def details_event(request):
-    return render(request, 'details_event.html')
+def update_event(request, id):
+    event = Event.objects.get(id=id)
+    form = EventModelForm(instance=event)
+
+    if request.method == 'POST':
+        form = EventModelForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+            messages.success(request, 'Event updated successfully')
+            return redirect('update-event', id=event.id)
+
+    context = {'form': form}
+    return render(request, 'new_event.html', context)
+
+
+def details_event(request, id):
+    event = Event.objects.select_related("category").prefetch_related("participant_set").get(id=id)
+    num_par = event.participant_set.count()
+    return render(request, 'details_event.html', {"event": event, "num_par": num_par})

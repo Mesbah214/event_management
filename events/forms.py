@@ -11,6 +11,11 @@ class StyledFormMixin:
                     'class': self.default_classes,
                     'placeholder': "e.g. Musical, Drama"
                 })
+            if isinstance(field.widget, forms.EmailInput):
+                field.widget.attrs.update({
+                    'class': self.default_classes,
+                    'placeholder': "e.g. john@email.com"
+                })
             elif isinstance(field.widget, forms.Textarea):
                 field.widget.attrs.update({
                     'class': self.default_classes,
@@ -37,7 +42,7 @@ class EventModelForm(StyledFormMixin, forms.ModelForm):
         widgets = {
             'category': forms.Select,
             'date': forms.SelectDateWidget,
-            'time': forms.TimeInput(attrs={'type': 'time'})
+            'time': forms.TimeInput(format='%H:%M', attrs={'type': 'time'})
         }
 
 class ParticipantModelForm(StyledFormMixin, forms.ModelForm):

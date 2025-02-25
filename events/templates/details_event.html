@@ -5,37 +5,31 @@
     <div class="flex justify-between items-start">
         <div>
             <div class="uppercase text-light text-gray-700 text-[1.2rem]">
-                <time datetime="2025-07-07">july 7, 2025</time>
-                <time datetime="20:00">20:00</time>
+                <time datetime="{{ event.date|date:'Y-m-d' }}">{{ event.date|date:"F j, Y" }}</time>
+                <time datetime="{{ event.time|time:'H:i' }}">{{ event.time }}</time>
             </div>
 
-            <h1 class="text-[2.4rem] font-bold md:text-[3.2rem] capitalize">lorem ipsum</h1>
-            <p class="text-[1.4rem] capitalize bg-rose-200 inline-block px-[.8rem] py-[.4rem] rounded-md mt-[.8rem]">musical</p>
+            <h1 class="text-[2.4rem] font-bold md:text-[3.2rem] capitalize">{{ event.name }}</h1>
+            <p class="text-[1.4rem] capitalize bg-rose-200 inline-block px-[.8rem] py-[.4rem] rounded-md mt-[.8rem]">{{ event.category }}</p>
         </div>
-        <button class="cursor-pointer border border-blue-500 px-[.8rem] py-[.4rem] rounded-sm capitalize text-blue-800">update</button>
+        <a href="{% url "update-event" event.id %}" class="cursor-pointer border border-blue-500 px-[.8rem] py-[.4rem] rounded-sm capitalize text-blue-800">update</a>
     </div>
-    <p class="text-gray-700 mt-[3.2rem]">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aspernatur assumenda beatae consectetur, delectus dolorem ducimus ex expedita in iure mollitia nobis obcaecati quam quidem rerum ullam veritatis voluptatibus? Dolore!</p>
-    <address class="mt-[3.2rem]"><span class="capitalize">location: </span>42 Elmwood Street, London, W1A 1AA United Kingdom</address>
+    <p class="text-gray-700 mt-[3.2rem]">{{ event.description }}</p>
+    <address class="mt-[3.2rem]"><span class="capitalize">location: </span>{{ event.location }}</address>
     <div class="mt-[4.8rem]">
         <h2 class="capitalize font-medium text-[2rem]">participants</h2>
-        <p class="text-gray-600 mt-[.4rem]">Number of total participants: <span class="text-gray-900">128</span></p>
+        <p class="text-gray-600 mt-[.4rem]">Number of total participants: <span class="text-gray-900">{{ num_par }}</span></p>
         <div class="mt-[2.4rem] rounded-md">
             <div class="grid grid-cols-2 bg-white py-[.8rem] border-b border-gray-200">
                 <h4 class="capitalize text-[1.3rem] text-gray-600 px-[1.2rem]">name</h4>
                 <p class="capitalize text-[1.3rem] text-gray-600 px-[1.2rem]">email</p>
             </div>
+            {% for participant in event.participant_set.all %}
             <div class="grid grid-cols-2 bg-white py-[.8rem] [&:not(:last-child)]:border-b border-gray-100">
-                <p class="text-slate-900 capitalize text-[1.3rem] px-[1.2rem]">Oliver Bennett</p>
-                <p class="capitalize text-[1.3rem] text-gray-800 px-[1.2rem] break-words">oliver.bennett@emailhub.com</p>
+                <a href="#" class="text-indigo-500 underline capitalize text-[1.3rem] px-[1.2rem]">{{ participant.name }}</a>
+                <p class="capitalize text-[1.3rem] text-gray-800 px-[1.2rem] break-words">{{ participant.email }}</p>
             </div>
-            <div class="grid grid-cols-2 bg-white py-[.8rem] [&:not(:last-child)]:border-b border-gray-100">
-                <p class="text-slate-900 capitalize text-[1.3rem] px-[1.2rem]">Sophie Carter</p>
-                <p class="capitalize text-[1.3rem] text-gray-800 px-[1.2rem] break-words">sophie.carter@inboxnow.co.uk</p>
-            </div>
-            <div class="grid grid-cols-2 bg-white py-[.8rem] [&:not(:last-child)]:border-b border-gray-100">
-                <p class="text-slate-900 capitalize text-[1.3rem] px-[1.2rem]">Liam Thompson</p>
-                <p class="capitalize text-[1.3rem] text-gray-800 px-[1.2rem] break-words">liam.thompson@fastmail.net</p>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </div>
