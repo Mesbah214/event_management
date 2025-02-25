@@ -3,7 +3,7 @@
     <h1 class="text-[2.4rem] font-bold md:text-[3.2rem] capitalize">{{ heading }}</h1>
     {% if messages %}
     {% for message in messages %}
-    {{ message }}
+    <p class="text-green-400 text-[1.3rem]">{{ message }}</p>
     {% endfor %}
     {% endif %}
     <form class="mt-[3.2rem] max-w-[57.6rem]" onsubmit="" method="POST">
@@ -24,7 +24,13 @@
             </div>
             {% for cat in cats %}
             <div class="grid grid-cols-2 bg-white py-[.8rem] [&:not(:last-child)]:border-b border-gray-100">
-                <a href="{% url "update-categories" cat.id %}" class="text-blue-500 underline capitalize text-[1.3rem] px-[1.2rem]">{{ cat.name }}</a>
+                <div>
+                    <form class="inline" action="{% url "delete-category" cat.id %}" method='POST'>
+                        {% csrf_token %}
+                        <button type='submit' class="bg-red-400 px-[.8rem] py-[.4rem] text-[1.2rem]">del</button>
+                    </form>
+                    <a href="{% url "update-categories" cat.id %}" class="text-blue-500 underline capitalize text-[1.3rem] px-[1.2rem]">{{ cat.name }}</a>
+                </div>
                 <p class="capitalize text-[1.3rem] text-gray-800 px-[1.2rem] break-words">{{ cat.description }}</p>
             </div>
             {% endfor %}

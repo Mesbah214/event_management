@@ -51,23 +51,22 @@ def dashboard(request):
 
 
 def categories(request):
-    form = CategoryModelForm
+    form = CategoryModelForm()
     cats = Category.objects.all().order_by('name')
-    num_of_cats = Category.objects.count()
 
     if request.method == 'POST':
         form = CategoryModelForm(request.POST)
         if form.is_valid():
             form.save()
 
-            return render(request, "categories.html", {
-                "form": form,
-                "message": "Category added successfully",
-                "cats": cats,
-                "number_of_categories": num_of_cats
-            })
-    context = {'form': form, 'cats': cats,
-               'number_of_categories': num_of_cats, "heading": "create new category"}
+            messages.success(request, "Category added successfully")
+            return redirect('categories')
+
+    context = {
+        'form': form, 'cats': cats,
+        'number_of_categories': cats.count(),
+        "heading": "create new category"
+    }
     return render(request, 'categories.html', context)
 
 
@@ -93,7 +92,11 @@ def update_categories(request, id):
 def delete_category(request, id):
     if request.method == 'POST':
         category = Category.objects.get(id=id)
-        category.delete()
+        try:
+            category.delete()
+        except:
+            messages.error(request, "Can not be deleted")
+            return redirect("categories")
 
         messages.success(request, "Category deleted successfully")
         return redirect("categories")
@@ -106,22 +109,18 @@ def delete_category(request, id):
 def participants(request):
     form = ParticipantModelForm()
     participants = Participant.objects.all().order_by("name")
-    number_of_participants = Participant.objects.count()
 
     if request.method == 'POST':
         form = ParticipantModelForm(request.POST)
         if form.is_valid():
             form.save()
 
-            return render(request, 'participants.html', {
-                "form": form,
-                "message": "Participant added succesfully",
-                "participants": participants,
-                'number_of_participants': number_of_participants
-            })
+            messages.success(request, "Participant added successfully")
+            return redirect("participants")
 
     context = {'form': form, "participants": participants,
-               'number_of_participants': number_of_participants, "heading": "create new participant"}
+               'number_of_participants': participants.count(), "heading": "create new participant"}
+
     return render(request, 'participants.html', context)
 
 
@@ -129,7 +128,6 @@ def update_participants(request, id):
     participant = Participant.objects.get(id=id)
     form = ParticipantModelForm(instance=participant)
     participants = Participant.objects.all().order_by("name")
-    number_of_participants = Participant.objects.count()
 
     if request.method == 'POST':
         form = ParticipantModelForm(request.POST, instance=participant)
@@ -140,7 +138,7 @@ def update_participants(request, id):
         return redirect('update-participants', id=id)
 
     context = {'form': form, "participants": participants,
-               'number_of_participants': number_of_participants, "heading": "update participant"}
+               'number_of_participants': participants.count(), "heading": "update participant"}
     return render(request, 'participants.html', context)
 
 
