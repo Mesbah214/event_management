@@ -24,12 +24,18 @@
                 <h4 class="capitalize text-[1.3rem] text-gray-600 px-[1.2rem]">name</h4>
                 <p class="capitalize text-[1.3rem] text-gray-600 px-[1.2rem]">email</p>
             </div>
-            {% for participant in event.participant_set.all %}
+            {% if participants %}
+            {% for participant in participants %}
             <div class="grid grid-cols-2 bg-white py-[.8rem] [&:not(:last-child)]:border-b border-gray-100">
-                <a href="#" class="text-indigo-500 underline capitalize text-[1.3rem] px-[1.2rem]">{{ participant.name }}</a>
+                <a href="{% url "update-participants" participant.id %}" class="text-indigo-500 underline capitalize text-[1.3rem] px-[1.2rem]">{{ participant.name }}</a>
                 <p class="capitalize text-[1.3rem] text-gray-800 px-[1.2rem] break-words">{{ participant.email }}</p>
             </div>
             {% endfor %}
+            {% else %}
+            <div class="grid grid-cols-2 bg-white py-[.8rem] [&:not(:last-child)]:border-b border-gray-100">
+                <p class="capitalize text-[1.3rem] text-gray-800 px-[1.2rem] break-words">No participant for this event!</p>
+            </div>
+            {% endif %}
         </div>
     </div>
 </div>

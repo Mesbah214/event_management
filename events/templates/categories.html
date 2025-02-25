@@ -1,6 +1,6 @@
 {% extends "base.html" %} {% block title %}Categories{% endblock title %} {% block categories %}
 <div class="px-[2.4rem] max-w-[112rem] mx-auto mt-[12rem] mb-[4rem]">
-    <h1 class="text-[2.4rem] font-bold md:text-[3.2rem] capitalize">create new category</h1>
+    <h1 class="text-[2.4rem] font-bold md:text-[3.2rem] capitalize">{{ heading }}</h1>
     {% if messages %}
     {% for message in messages %}
     {{ message }}

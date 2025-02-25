@@ -16,6 +16,21 @@ class StyledFormMixin:
                     'class': self.default_classes,
                     'placeholder': "e.g. john@email.com"
                 })
+            if isinstance(field.widget, forms.SelectDateWidget):
+                field.widget.attrs.update({
+                    'class': f"{self.default_classes} w-max mr-[1rem]",
+                    'placeholder': "e.g. john@email.com"
+                })
+            if isinstance(field.widget, forms.TimeInput):
+                field.widget.attrs.update({
+                    'class': f"{self.default_classes} w-max ml-[1rem]",
+                    'placeholder': "e.g. john@email.com"
+                })
+            elif isinstance(field.widget, forms.Select):
+                field.widget.attrs.update({
+                    'class': f"{self.default_classes} w-max ml-[1rem]",
+                    'placeholder': "e.g. Marks a musical event"
+                })
             elif isinstance(field.widget, forms.Textarea):
                 field.widget.attrs.update({
                     'class': self.default_classes,
