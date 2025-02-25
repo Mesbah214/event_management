@@ -82,7 +82,7 @@ def update_categories(request, id):
         if form.is_valid():
             form.save()
 
-            messages.success(request, 'Category update successfully')
+            messages.success(request, 'Category updated successfully')
             return redirect('update-categories', id=id)
 
     return render(request, 'categories.html', context)
@@ -104,6 +104,26 @@ def participants(request):
                 "participants": participants,
                 'number_of_participants': number_of_participants
             })
+
+    context = {'form': form, "participants": participants,
+               'number_of_participants': number_of_participants}
+    return render(request, 'participants.html', context)
+
+
+def update_participants(request, id):
+    participant = Participant.objects.get(id=id)
+    form = ParticipantModelForm(instance=participant)
+    participants = Participant.objects.all()
+    number_of_participants = Participant.objects.count()
+
+    if request.method == 'POST':
+        form = ParticipantModelForm(request.POST, instance=participant)
+        if form.is_valid():
+            form.save()
+
+        messages.success(request, "Participant updated successfully")
+        return redirect('update-participants', id=id)
+
 
     context = {'form': form, "participants": participants,
                'number_of_participants': number_of_participants}
