@@ -52,7 +52,7 @@ def dashboard(request):
         "events": events,
         "heading": heading
     }
-    return render(request, 'home.html', context)
+    return render(request, 'dashboard.html', context)
 
 
 def categories(request):
