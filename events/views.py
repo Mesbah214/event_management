@@ -11,10 +11,15 @@ from django.contrib import messages
 
 
 def all_events(request):
+    search = request.GET.get('q', '')
+
     events = Event.objects.select_related(
         'category').annotate(num_par=Count('participant')).order_by("name")
-    num_events = Event.objects.count()
-    context = {'events': events, 'num_events': num_events}
+
+    if search:
+        events = events.filter(name__icontains=search)
+
+    context = {'events': events, 'num_events': events.count()}
     return render(request, 'events.html', context)
 
 
