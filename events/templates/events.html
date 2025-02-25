@@ -21,11 +21,11 @@
             {% for event in events %}
             <div class="grid grid-cols-3 bg-white py-[.8rem] [&:not(:last-child)]:border-b border-gray-100">
                 <div>
-                <form class="inline" action="{% url "delete-event" event.id %}" method='POST'>
-                    {% csrf_token %}
-                    <button type='submit' class="bg-red-400 px-[.8rem] py-[.4rem] text-[1.2rem]">del</button>
-                </form>
-                <a class="text-indigo-500 capitalize text-[1.3rem] px-[1.2rem]" href="{% url "details-event" event.id %}" title="{{ event.name }}">{{ event.name }}</a>
+                    <form class="inline" action="{% url "delete-event" event.id %}" method='POST'>
+                        {% csrf_token %}
+                        <button type='submit' class="bg-red-400 px-[.8rem] py-[.4rem] text-[1.2rem]">del</button>
+                    </form>
+                    <a class="text-indigo-500 capitalize text-[1.3rem] px-[1.2rem]" href="{% url "details-event" event.id %}" title="{{ event.name }}">{{ event.name }}</a>
                 </div>
                 <p class="capitalize text-[1.3rem] text-gray-800 px-[1.2rem]">{{ event.category.name }}</p>
                 <p class="capitalize text-[1.3rem] text-gray-800 px-[1.2rem]">{{ event.num_par }}</p>

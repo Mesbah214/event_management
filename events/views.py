@@ -66,7 +66,8 @@ def categories(request):
                 "cats": cats,
                 "number_of_categories": num_of_cats
             })
-    context = {'form': form, 'cats': cats, 'number_of_categories': num_of_cats, "heading": "create new category"}
+    context = {'form': form, 'cats': cats,
+               'number_of_categories': num_of_cats, "heading": "create new category"}
     return render(request, 'categories.html', context)
 
 
@@ -75,7 +76,8 @@ def update_categories(request, id):
     form = CategoryModelForm(instance=category)
     cats = Category.objects.all().order_by('name')
     num_of_cats = Category.objects.count()
-    context = {'form': form, 'cats': cats, 'number_of_categories': num_of_cats, "heading": "update category"}
+    context = {'form': form, 'cats': cats,
+               'number_of_categories': num_of_cats, "heading": "update category"}
 
     if request.method == 'POST':
         form = CategoryModelForm(request.POST, instance=category)
@@ -86,6 +88,19 @@ def update_categories(request, id):
             return redirect('update-categories', id=id)
 
     return render(request, 'categories.html', context)
+
+
+def delete_category(request, id):
+    if request.method == 'POST':
+        category = Category.objects.get(id=id)
+        category.delete()
+
+        messages.success(request, "Category deleted successfully")
+        return redirect("categories")
+
+    else:
+        messages.error(request, "Something went wrong!")
+        return redirect("categories")
 
 
 def participants(request):
@@ -127,6 +142,19 @@ def update_participants(request, id):
     context = {'form': form, "participants": participants,
                'number_of_participants': number_of_participants, "heading": "update participant"}
     return render(request, 'participants.html', context)
+
+
+def delete_participant(request, id):
+    if request.method == 'POST':
+        participant = Participant.objects.get(id=id)
+        participant.delete()
+
+        messages.success(request, "Participant deleted successfully")
+        return redirect("participants")
+
+    else:
+        messages.error(request, "Something went wrong!")
+        return redirect("participants")
 
 
 def new_event(request):

@@ -6,7 +6,7 @@
     <div>
         {% if messages %}
         {% for message in messages %}
-        <p>{{ message }}</p>
+        <p class="text-green-400 text-[1.3rem]">{{ message }}</p>
         {% endfor %}
         {% endif %}
     </div>
@@ -28,7 +28,13 @@
             </div>
             {% for participant in participants %}
             <div class="grid grid-cols-2 bg-white py-[.8rem] [&:not(:last-child)]:border-b border-gray-100">
-                <a href="{% url "update-participants" participant.id %}" class="text-blue-500 underline capitalize text-[1.3rem] px-[1.2rem]">{{ participant.name }}</a>
+                <div>
+                    <form class="inline" action="{% url "delete-participant" participant.id %}" method='POST'>
+                        {% csrf_token %}
+                        <button type='submit' class="bg-red-400 px-[.8rem] py-[.4rem] text-[1.2rem]">del</button>
+                    </form>
+                    <a href="{% url "update-participants" participant.id %}" class="text-blue-500 underline capitalize text-[1.3rem] px-[1.2rem]">{{ participant.name }}</a>
+                </div>
                 <p class="capitalize text-[1.3rem] text-gray-600 px-[1.2rem] break-words">{{ participant.email }}</p>
             </div>
             {% endfor %}
