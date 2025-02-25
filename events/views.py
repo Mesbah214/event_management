@@ -69,6 +69,26 @@ def categories(request):
     context = {'form': form, 'cats': cats, 'number_of_categories': num_of_cats}
     return render(request, 'categories.html', context)
 
+def update_categories(request, id):
+    category = Category.objects.get(id=id)
+    form = CategoryModelForm(instance=category)
+    cats = Category.objects.all()
+    num_of_cats = Category.objects.count()
+
+    if request.method == 'POST':
+        form = CategoryModelForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+            return render(request, "categories.html", {
+                "form": form,
+                "message": "Category updated successfully",
+                "cats": cats,
+                "number_of_categories": num_of_cats
+            })
+    context = {'form': form, 'cats': cats, 'number_of_categories': num_of_cats}
+    return render(request, 'categories.html', context)
+
 
 def participants(request):
     form = ParticipantModelForm()

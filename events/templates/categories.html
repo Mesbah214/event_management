@@ -22,7 +22,7 @@
             </div>
             {% for cat in cats %}
             <div class="grid grid-cols-2 bg-white py-[.8rem] [&:not(:last-child)]:border-b border-gray-100">
-                <a href="#" class="text-blue-500 underline capitalize text-[1.3rem] px-[1.2rem]">{{ cat.name }}</a>
+                <a href="{% url "update-categories" cat.id %}" class="text-blue-500 underline capitalize text-[1.3rem] px-[1.2rem]">{{ cat.name }}</a>
                 <p class="capitalize text-[1.3rem] text-gray-800 px-[1.2rem] break-words">{{ cat.description }}</p>
             </div>
             {% endfor %}
