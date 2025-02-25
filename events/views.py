@@ -144,6 +144,19 @@ def new_event(request):
     return render(request, 'new_event.html', context)
 
 
+def delete_event(request, id):
+    if request.method == 'POST':
+        event = Event.objects.get(id=id)
+        event.delete()
+
+        messages.success(request, "Event deleted successfully")
+        return redirect("events")
+
+    else:
+        messages.error(request, "Something went wrong!")
+        return redirect("events")
+
+
 def update_event(request, id):
     event = Event.objects.get(id=id)
     form = EventModelForm(instance=event)

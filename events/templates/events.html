@@ -5,6 +5,11 @@
     <h1 class="text-[2.4rem] font-bold md:text-[3.2rem] capitalize">all events</h1>
     <p class="text-gray-400 text-[1.3rem]">To view details of an event, click on the name</p>
     <p class="text-gray-600 mt-[2.4rem]">Number of total events: <span class="text-gray-900">{{ num_events }}</span></p>
+    {% if messages %}
+    {% for message in messages %}
+    <p class="text-green-400 text-[1.3rem]">{{ message }}</p>
+    {% endfor %}
+    {% endif %}
     <!--all events-->
     <div class="mt-[4.8rem]">
         <div class="mt-[2.4rem] rounded-md">
@@ -15,8 +20,14 @@
             </div>
             {% for event in events %}
             <div class="grid grid-cols-3 bg-white py-[.8rem] [&:not(:last-child)]:border-b border-gray-100">
+                <div>
+                <form class="inline" action="{% url "delete-event" event.id %}" method='POST'>
+                    {% csrf_token %}
+                    <button type='submit' class="bg-red-400 px-[.8rem] py-[.4rem] text-[1.2rem]">del</button>
+                </form>
                 <a class="text-indigo-500 capitalize text-[1.3rem] px-[1.2rem]" href="{% url "details-event" event.id %}" title="{{ event.name }}">{{ event.name }}</a>
-                <a class="capitalize text-[1.3rem] text-gray-800 px-[1.2rem]">{{ event.category.name }}</a>
+                </div>
+                <p class="capitalize text-[1.3rem] text-gray-800 px-[1.2rem]">{{ event.category.name }}</p>
                 <p class="capitalize text-[1.3rem] text-gray-800 px-[1.2rem]">{{ event.num_par }}</p>
             </div>
             {% endfor %}
