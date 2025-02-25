@@ -69,24 +69,22 @@ def categories(request):
     context = {'form': form, 'cats': cats, 'number_of_categories': num_of_cats}
     return render(request, 'categories.html', context)
 
+
 def update_categories(request, id):
     category = Category.objects.get(id=id)
     form = CategoryModelForm(instance=category)
     cats = Category.objects.all()
     num_of_cats = Category.objects.count()
+    context = {'form': form, 'cats': cats, 'number_of_categories': num_of_cats}
 
     if request.method == 'POST':
-        form = CategoryModelForm(request.POST)
+        form = CategoryModelForm(request.POST, instance=category)
         if form.is_valid():
             form.save()
 
-            return render(request, "categories.html", {
-                "form": form,
-                "message": "Category updated successfully",
-                "cats": cats,
-                "number_of_categories": num_of_cats
-            })
-    context = {'form': form, 'cats': cats, 'number_of_categories': num_of_cats}
+            messages.success(request, 'Category update successfully')
+            return redirect('update-categories', id=id)
+
     return render(request, 'categories.html', context)
 
 
@@ -132,18 +130,19 @@ def update_event(request, id):
     form = EventModelForm(instance=event)
 
     if request.method == 'POST':
-        form = EventModelForm(request.POST)
+        form = EventModelForm(request.POST, instance=event)
         if form.is_valid():
             form.save()
 
             messages.success(request, 'Event updated successfully')
-            return redirect('update-event', id=event.id)
+            return redirect('update-event', id=id)
 
     context = {'form': form}
     return render(request, 'new_event.html', context)
 
 
 def details_event(request, id):
-    event = Event.objects.select_related("category").prefetch_related("participant_set").get(id=id)
+    event = Event.objects.select_related(
+        "category").prefetch_related("participant_set").get(id=id)
     num_par = event.participant_set.count()
     return render(request, 'details_event.html', {"event": event, "num_par": num_par})
