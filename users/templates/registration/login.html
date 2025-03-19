@@ -1,25 +1,32 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static "css/output.css" %}">
     <title>Document</title>
 </head>
 <body>
-    <h1>Welcome to the login system</h1>
-    <div>
+    <h1 class="text-center text-[2rem] mt-[1rem] px-[1.6rem]">Welcome to the login system</h1>
+    <div class="max-w-[30rem] mx-auto my-[4.8rem] px-[1.6rem]">
+        {% if messages %}
+        {% for message in messages %}
+        <p class="text-green-400 text-[1.3rem] mb-[1.6rem]">{{ message }}</p>
+        {% endfor %}
+        {% endif %}
         <form method="POST">
             {% csrf_token %}
             <div>
                 <label for="username">Username</label>
-                <input type="text" name="username" id="username">
+                <input class="border border-blue-800 px-[.8rem] py-[.4rem] w-full focus-visible:outline focus-visible:outline-blue-700 rounded-lg mb-[1.6rem]" type="text" name="username" id="username">
             </div>
             <div>
                 <label for="password">Password</label>
-                <input type="password" name="password" id="password">
+                <input class="border border-blue-800 px-[.8rem] py-[.4rem] w-full focus-visible:outline focus-visible:outline-blue-700 rounded-lg mb-[1.6rem]" type="text" name="username" id="username"type="password" name="password" id="password">
             </div>
             <div>
-                <button type="submit">signin</button>
+                <button class="bg-indigo-500 text-white px-[2.4rem] py-[.8rem] capitalize rounded-lg" type="submit">sign in</button>
             </div>
         </form>
     </div>

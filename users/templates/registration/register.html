@@ -1,20 +1,15 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static "css/output.css" %}">
     <title>Document</title>
 </head>
 <body>
-    <h1>Welcome to the registration system</h1>
-    <div>
-        {% if form.non_field_errors %}
-        <ul>
-            {% for error in form.non_field_errors %}
-            <li>{{ error }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
+    <h1 class="text-center text-[2rem] mt-[1rem] px-[1.6rem]">Welcome to the registration system</h1>
+    <div class="max-w-[30rem] mx-auto my-[4.8rem] px-[1.6rem]">
         <form action="" method="POST">
             {% csrf_token %}
             {% for field in form %}
@@ -30,8 +25,17 @@
                 {% endif %}
                 {% endfor %}
             </p>
+            <p>
+            {% if form.non_field_errors %}
+            <ul>
+                {% for error in form.non_field_errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            </p>
             <div>
-                <button type="submit">signup</button>
+                <button class="bg-indigo-500 text-white px-[2.4rem] py-[.8rem] capitalize rounded-lg" type="submit">sign up</button>
             </div>
         </form>
     </div>

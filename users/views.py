@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from users.forms import RegistrationForm, customRegistrationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.contrib import messages
 
 # Create your views here.
 
@@ -15,9 +16,11 @@ def sign_up(request):
         if form.is_valid():
             form.save()
 
+            messages.success(request, 'Account created successfully')
+            return redirect('sign-in')
+
 
     context = {'form': form}
-
     return render(request, 'registration/register.html', context)
 
 
